@@ -1,8 +1,8 @@
 
 {
-  "name": "custom-activity-sms",
+  "name": "customSmS",
   "version": "1.0.0",
-  "description": "Custom Activity pour Salesforce Marketing Cloud - SMS Orange Sénégal",
+  "description": "Custom - SMS Orange Sénégal",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

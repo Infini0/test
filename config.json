@@ -2,20 +2,20 @@
 {
   "workflowApiVersion": "1.1",
   "metaData": {
-    "icon": "https://ton-domaine.onrender.com/icon.png",
-    "iconSmall": "https://ton-domaine.onrender.com/icon.png",
+    "icon": "https://test-wfie.onrender.com/icon.png",
+    "iconSmall": "https://test-wfie.onrender.com/icon.png",
     "category": "message"
   },
   "type": "REST",
   "lang": {
     "en-US": {
-      "name": "Orange SMS Activity",
-      "description": "Envoi de SMS via Orange Sénégal"
+      "name": "CustomSms",
+      "description": "SMS via Orange Sénégal"
     }
   },
   "arguments": {
     "execute": {
-      "url": "https://ton-domaine.onrender.com/activity/execute",
+      "url": "https://test-wfie.onrender.com/execute",
       "verb": "POST",
       "body": "",
       "header": "",
@@ -25,18 +25,18 @@
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://ton-domaine.onrender.com/activity/publish"
+      "url": "https://test-wfie.onrender.com/activity/publish"
     },
     "validate": {
-      "url": "https://ton-domaine.onrender.com/activity/validate"
+      "url": "https://test-wfie.onrender.com/activity/validate"
     },
     "stop": {
-      "url": "https://ton-domaine.onrender.com/activity/stop"
+      "url": "https://test-wfie.onrender.com/activity/stop"
     }
   },
   "userInterfaces": {
     "configModal": {
-      "url": "https://ton-domaine.onrender.com/"
+      "url": "https://test-wfie.onrender.com/index.html"
     }
   },
   "schema": {
