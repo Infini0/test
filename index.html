@@ -1,52 +1,127 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Activity SMS</title>
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #0b1c38; color: white; padding: 20px; }
-    h2 { color: #66b2ff; }
-    .step { margin-bottom: 30px; padding: 20px; background-color: #132c4c; border-radius: 8px; }
-    label { display: block; margin-top: 10px; }
-    input, textarea, button { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: none; }
-    button { background-color: #0066cc; color: white; margin-top: 20px; cursor: pointer; }
-    button:hover { background-color: #005bb5; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Envoyer un SMS - Orange Sénégal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fb;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            background-color: #fff;
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff6600;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #e65c00;
+        }
+        .info {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Configuration de l'activité SMS</h1>
 
-  <div class="step">
-    <h2>Étape 1 : Configuration de la marque</h2>
-    <label for="brandName">Nom de la marque</label>
-    <input type="text" id="brandName" placeholder="Ex: Orange Sénégal">
-    <label for="senderNumber">Numéro d'envoi</label>
-    <input type="text" id="senderNumber" placeholder="Ex: +221770000000">
-  </div>
+<div class="container">
+    <h1>Configuration SMS - Orange Sénégal</h1>
 
-  <div class="step">
-    <h2>Étape 2 : Message et tracking</h2>
-    <label for="message">Contenu du message</label>
-    <textarea id="message" rows="4" placeholder="Bonjour {{FirstName}}, votre code est : 123456"></textarea>
-    <label for="tracking">ID de tracking (optionnel)</label>
-    <input type="text" id="tracking" placeholder="Tracking ID">
+    <form id="smsForm">
 
-    <button onclick="submitActivity()">Enregistrer l'activité</button>
-  </div>
+        <label for="phoneNumber">Numéro du Client *</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="221771234567" required>
 
-  <script>
-    function submitActivity() {
-      const data = {
-        brandName: document.getElementById('brandName').value,
-        senderNumber: document.getElementById('senderNumber').value,
-        message: document.getElementById('message').value,
-        tracking: document.getElementById('tracking').value
-      };
-      console.log("Données soumises :", data);
-      alert("Configuration enregistrée (simulation)");
+        <label for="smsMessage">Message à Envoyer *</label>
+        <textarea id="smsMessage" name="smsMessage" rows="5" placeholder="Votre message..." required></textarea>
+
+        <div class="info">
+            Vous pouvez utiliser des champs dynamiques (ex: {{FirstName}}, {{LastName}}).
+        </div>
+
+        <label for="senderName">Nom de l'Expéditeur (optionnel)</label>
+        <input type="text" id="senderName" name="senderName" placeholder="Air Côte D'ivoire">
+
+        <label for="trackingOption">Suivi Statut du SMS</label>
+        <select id="trackingOption" name="trackingOption">
+            <option value="true" selected>Activer le suivi</option>
+            <option value="false">Désactiver le suivi</option>
+        </select>
+
+        <button type="submit">Sauvegarder la Configuration</button>
+    </form>
+</div>
+
+<script>
+    // Script de communication avec Journey Builder
+    window.onload = function () {
+        var smsForm = document.getElementById('smsForm');
+
+        smsForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            var data = {
+                phoneNumber: document.getElementById('phoneNumber').value,
+                smsMessage: document.getElementById('smsMessage').value,
+                senderName: document.getElementById('senderName').value,
+                trackingOption: document.getElementById('trackingOption').value
+            };
+
+            if (window.parent && window.parent.postMessage) {
+                window.parent.postMessage(
+                    {
+                        action: "updateActivity",
+                        data: data
+                    },
+                    "*"
+                );
+            }
+
+            alert("Configuration enregistrée avec succès !");
+        });
     }
-  </script>
+</script>
+
 </body>
 </html>
